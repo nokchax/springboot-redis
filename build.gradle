@@ -19,7 +19,13 @@ repositories {
 }
 
 dependencies {
+    // spring data redis
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // for embedded redis
+    // link: https://github.com/ozimov/embedded-redis
+    implementation('it.ozimov:embedded-redis:0.7.3')
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
