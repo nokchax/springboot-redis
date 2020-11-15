@@ -24,7 +24,9 @@ dependencies {
 
     // for embedded redis
     // link: https://github.com/ozimov/embedded-redis
-    implementation('it.ozimov:embedded-redis:0.7.3')
+    implementation('it.ozimov:embedded-redis:0.7.3') {
+        exclude group: 'org.slf4j'
+    }
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
