@@ -13,28 +13,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class RedisApplicationTests {
-    private static RedisClient client;
-    private static StatefulRedisConnection<String, String> connection;
-    private static RedisCommands<String, String> command;
-
-    @BeforeAll
-    public static void init() {
-        client = RedisClient.create("redis://localhost:6379/0");
-        connection = client.connect();
-        command = connection.sync();
-    }
-
-    @AfterAll
-    public static void destroy() {
-        connection.close();
-        client.shutdown();
-    }
 
     @Test
     @DisplayName("레디스 서버에 연결이 잘 되고, 값이 잘 저장되는지")
     void contextLoads() {
         String key = "key";
         String value = "value";
+
+        // beforeAll run before bean initializing
+        RedisClient client = RedisClient.create("redis://localhost:6379/0");
+        StatefulRedisConnection<String, String> connection = client.connect();
+        RedisCommands<String, String> command = connection.sync();
 
         // before set
         assertThat(command.get(key)).isNull();
